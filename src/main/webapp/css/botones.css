@@ -1,0 +1,96 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 8 oct. 2023, 21:17:00
+    Author     : HJVM
+*/
+
+.botonSinBorde{
+    border: none;
+    
+}
+
+.basico{
+    cursor: pointer;
+    margin: 6px 0px 6px 0px;
+}
+
+.botonRedondo{
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.botonRedondoTitulo{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.boton-azul{
+    background-color: rgba(30, 30, 233, 0.712);
+    color: white;
+}
+
+.boton-azul:hover{
+    transition-duration: 0.3s;
+    background-color: red;
+}
+
+
+.boton-verde{
+    background-color: rgba(88, 233, 30, 0.712);
+    color: white;
+}
+
+.boton-verde:hover{
+    transition-duration: 0.3s;
+    background-color: green;
+}
+
+.boton-rojo{
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+
+.boton-rojo:hover{
+    transition-duration: 0.3s;
+    background-color: rgba(226, 16, 16, 0.486);
+}
+
+.boton-link-azul{
+    text-decoration: none;
+    background-color: rgba(30, 30, 233, 0.712);
+    color: white;
+}
+
+.boton-link-azul:hover{
+    transition-duration: 0.3s;
+    background-color: red;
+}
+
+.boton-link-rojo{
+    text-decoration: none;
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+.boton-link-rojo:hover{
+    transition-duration: 0.3s;
+    background-color: rgba(226, 16, 16, 0.486);
+}
+
+
+.boton-link-verde{
+    text-decoration: none;
+    background-color: rgb(0, 255, 0);
+    color: white;
+}
+
+.boton-link-verde:hover{
+    transition-duration: 0.3s;
+    background-color: rgba(88, 233, 30, 0.712);
+}
+
