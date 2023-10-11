@@ -9,7 +9,9 @@ package modelo;
  * @author HJVM
  */
 public class DetalleOrden {
+
     private int codDetalleOrden;
+    private int codOrden;
     private int codPlato;
     private int cantidad;
 
@@ -21,6 +23,13 @@ public class DetalleOrden {
         this.codDetalleOrden = codDetalleOrden;
     }
 
+    public int getCodOrden() {
+        return codOrden;
+    }
+
+    public void setCodOrden(int codOrden) {
+        this.codOrden = codOrden;
+    }
 
     public int getCodPlato() {
         return codPlato;
@@ -37,6 +46,5 @@ public class DetalleOrden {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
-    
+
 }

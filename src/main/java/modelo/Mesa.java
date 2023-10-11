@@ -37,5 +37,12 @@ public class Mesa {
         this.estadoMesa = estadoMesa;
     }
     
+    public String getImgMesa(){
+        return estadoMesa == 1 ? "img/active_table.png" : estadoMesa == 2? "img/ocupaded_table.png" : "im/disabled_table.png";
+    }
     
+    public String getEstadoMesaEnNombre(){
+        return estadoMesa == 1 ? "Activo" : estadoMesa == 2? "Ocupado" : "En Manteniemiento";
+        
+    }
 }

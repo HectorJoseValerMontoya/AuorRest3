@@ -47,6 +47,37 @@ public class DaoPlato {
 
         return platos;
     }
+    
+    public List<Plato> getListarPlatosActivosDeCategoria(int codCategoriaPlato) {
+        List<Plato> platos = new ArrayList<>();
+
+        String sql = "call mostrarTodosLosDatosDePlatosActivosPorCategoria(?);";
+
+        Connection cn = null;
+        try {
+            cn = MySQLConexion.getConexion();
+            PreparedStatement st = cn.prepareCall(sql);
+            st.setInt(1, codCategoriaPlato);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Plato plato = new Plato();
+                plato.setCodPlato(rs.getInt(1));
+                plato.setNombrePlato(rs.getString(2));
+                plato.setPrecioPlato(rs.getDouble(3));
+                plato.setCodCategoriaPlato(rs.getInt(4));
+                plato.setEstadoPlato(rs.getInt(5));
+                plato.setImagenPlato(rs.getString(6));
+                //plato.setCodCategoriaPlato(rs.getInt(7));
+                plato.setNombreCategoria(rs.getString(8));
+                plato.setEstadoCategoria(rs.getInt(9));
+
+                platos.add(plato);
+            }
+        } catch (Exception e) {
+        }
+
+        return platos;
+    }
 
     public List<Plato> getListarPlatosTotal() {
         List<Plato> platos = new ArrayList<>();

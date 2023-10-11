@@ -4,6 +4,9 @@
     Author     : HJVM
 --%>
 
+<%@page import="dao.DaoOrden"%>
+<%@page import="modelo.Mesa"%>
+<%@page import="dao.DaoMesa"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +23,8 @@
 
     </head>
     <body>
-        
+
+
         <header>
             <nav class="navbar navbar-expand-lg bg-gradient-yellow cabecera">
                 <div class="container">
@@ -42,7 +46,7 @@
                                 <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">Mesas</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link active"  aria-current="page" href="pagRealizarOrden.jsp">Realizar Orden</a></li>
-                                    <li><a class="nav-link" href="pagAdministrarMesas.jsp">Administrar Mesas</a></li>
+                                    <li><a class="nav-link" href="pagAdministrarMesa.jsp">Administrar Mesas</a></li>
                                     <li><a class="nav-link" href="pagCobrarMesa.jsp">Cobrar Mesa</a></li> 
                                 </ul>
                             </li>
@@ -59,15 +63,69 @@
                 </div>
             </nav>
         </header>
-        
-        
-        
-        <!--
-            1) Escoger Mesa
-            2) Escoges Categoria
-            3) Escoges plato con cantidad
-            4) Regresa al paso 2
-        -->
-        
-    </body>
+
+        <%DaoMesa daoMesa = new DaoMesa(); DaoOrden daoO = new DaoOrden();%> 
+        <style>
+            .img{
+                margin-right: 100px;
+            }
+        </style>
+    <center>
+        <br>
+        <h1>Seleccione la mesa con la que va a trabajar.</h1>
+        <br>
+    </center>
+    <table border="0" class="table ">
+
+        <tbody>
+            <%
+                int c = 0;
+                out.print("<tr>");
+                for (Mesa mesa : daoMesa.getMesas()) {
+            %>
+        <td>
+            <%
+                int estadoAPoner = 1;
+                if (mesa.getEstadoMesa() == estadoAPoner) {
+            %>
+            <a href="SMesa?op=1&codMesa=<%=mesa.getCodMesa()%>&codOrden=<%=daoO.siguienteOrden()%>">
+                <%
+                    }
+                %>
+                <img class="img" src="<%=mesa.getImgMesa()%>" alt="<%=mesa.getDescripcion()%>" width="250px"/>
+                <br>
+                <label><%=mesa.getDescripcion()%> | Mesa N° <%=mesa.getCodMesa()%> | (<%=mesa.getEstadoMesaEnNombre()%>)</label>
+
+                <%
+                    if (mesa.getEstadoMesa() == estadoAPoner) {
+                %>
+            </a>
+            <%
+                }
+            %>
+        </td>
+        <%
+            c++;
+            if (c == 3) {
+                c = 0;
+        %>
+        <tr>
+            <%
+                    }
+                }
+            %>
+            </tbody>
+    </table>
+
+
+
+
+    <!--
+        1) Escoger Mesa
+        2) Escoges Categoria
+        3) Escoges plato con cantidad
+        4) Regresa al paso 2
+    -->
+
+</body>
 </html>

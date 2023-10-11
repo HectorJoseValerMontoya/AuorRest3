@@ -1,15 +1,17 @@
 <%-- 
-    Document   : pagEscogerMesa
-    Created on : 10 oct. 2023, 14:47:28
+    Document   : pagOrdenarPedido
+    Created on : 10 oct. 2023, 17:56:47
     Author     : HJVM
 --%>
 
+<%@page import="modelo.CategoriaPlato"%>
+<%@page import="dao.DaoCategoriaPlato"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Ordenar Pedido</title>
         <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -58,7 +60,40 @@
                 </div>
             </nav>
         </header>
-        
-        
-    </body>
+
+    <center>
+        <br>
+        <h1>Seleccione la categoria</h1>
+        <br>
+    </center>
+    
+    <%
+        DaoCategoriaPlato daoCP = new DaoCategoriaPlato();
+        int codMesa = Integer.parseInt(request.getParameter("codMesa"));
+    %>
+    
+    <table border="0" class="table table-bordered">
+        <tbody>
+            <%
+                int c = 0;
+                out.print("<tr>");
+                for (CategoriaPlato cp : daoCP.getListarCategoriaPlatosActivos()) {
+            %>
+        <td>
+            <a style="text-decoration: none;" class="basico botonRedondo" href="SOrden?op=1&codMesa=<%=codMesa%>&codCategoriaPlato=<%=cp.getCodCategoriaPlato()%>"><%=cp.getNombreCategoria()%></a>
+        </td>
+        <%
+            c++;
+            if (c == 5) {
+                c = 0;
+        %>
+        <tr>
+            <%
+                    }
+                }
+            %>
+            </tbody>
+    </table>
+    
+</body>
 </html>

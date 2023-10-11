@@ -15,7 +15,6 @@ public class Plato extends CategoriaPlato{
     private int codPlato;
     private String nombrePlato;
     private double precioPlato;
-    private int codCategoriaPlato;
     private int estadoPlato;
     private String imagenPlato;
 
@@ -43,14 +42,6 @@ public class Plato extends CategoriaPlato{
         this.precioPlato = precioPlato;
     }
 
-    public int getCodCategoriaPlato() {
-        return codCategoriaPlato;
-    }
-
-    public void setCodCategoriaPlato(int codCategoriaPlato) {
-        this.codCategoriaPlato = codCategoriaPlato;
-    }
-
     public int getEstadoPlato() {
         return estadoPlato;
     }
@@ -73,6 +64,10 @@ public class Plato extends CategoriaPlato{
     
     public String getNombreTipoCategoria(){
         DaoCategoriaPlato dao = new DaoCategoriaPlato();
-        return dao.getNombreTipoCategoria(codCategoriaPlato);
+        return dao.getNombreTipoCategoria(getCodCategoriaPlato());
+    }
+    
+    public String getImgPlato(){
+        return "falta";
     }
 }

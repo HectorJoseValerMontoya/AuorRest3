@@ -1,15 +1,17 @@
 <%-- 
-    Document   : pagEscogerMesa
-    Created on : 10 oct. 2023, 14:47:28
+    Document   : pagAdministrarMesas
+    Created on : 10 oct. 2023, 14:38:59
     Author     : HJVM
 --%>
 
+<%@page import="dao.DaoMesa"%>
+<%@page import="modelo.Mesa"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Administrar Mesas</title>
         <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -20,6 +22,7 @@
 
     </head>
     <body>
+
         <header>
             <nav class="navbar navbar-expand-lg bg-gradient-yellow cabecera">
                 <div class="container">
@@ -58,7 +61,49 @@
                 </div>
             </nav>
         </header>
+
+        <%DaoMesa daoMesa = new DaoMesa();%>
         
-        
-    </body>
+        <style>
+            .img{
+                margin-right: 100px;
+            }
+        </style>
+    <center>
+        <br>
+        <h1>Seleccione la mesa con la que va a trabajar.</h1>
+        <br>
+    </center>
+    <table border="0" class="table ">
+
+        <tbody>
+            <%
+                int c = 0;
+                out.print("<tr>");
+                for (Mesa mesa : daoMesa.getMesas()) {
+            %>
+        <td>
+            <a href="SMesa?op=2&codMesa=<%=mesa.getCodMesa()%>">
+                
+                <img class="img" src="<%=mesa.getImgMesa()%>" alt="<%=mesa.getDescripcion()%>" width="250px"/>
+                <br>
+                <label><%=mesa.getDescripcion()%> | Mesa N° <%=mesa.getCodMesa()%> | (<%=mesa.getEstadoMesaEnNombre()%>)</label>
+                <br>
+                <label>(Click para de cambiar de estado) </label>
+
+            </a>
+        </td>
+        <%
+            c++;
+            if (c == 3) {
+                c = 0;
+        %>
+        <tr>
+            <%
+                    }
+                }
+            %>
+            </tbody>
+    </table>
+</body>
 </html>

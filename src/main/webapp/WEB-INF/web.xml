@@ -20,6 +20,18 @@
         <servlet-name>SCategoriaPlato</servlet-name>
         <servlet-class>servlets.SCategoriaPlato</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SMesa</servlet-name>
+        <servlet-class>servlets.SMesa</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SOrden</servlet-name>
+        <servlet-class>servlets.SOrden</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SDetalleOrden</servlet-name>
+        <servlet-class>servlets.SDetalleOrden</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SLogin</servlet-name>
         <url-pattern>/SLogin</url-pattern>
@@ -39,6 +51,18 @@
     <servlet-mapping>
         <servlet-name>SCategoriaPlato</servlet-name>
         <url-pattern>/SCategoriaPlato</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SMesa</servlet-name>
+        <url-pattern>/SMesa</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SOrden</servlet-name>
+        <url-pattern>/SOrden</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SDetalleOrden</servlet-name>
+        <url-pattern>/SDetalleOrden</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

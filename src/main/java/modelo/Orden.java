@@ -9,17 +9,9 @@ package modelo;
  * @author HJVM
  */
 public class Orden extends DetalleOrden {
-    private int codOrden;
+
     private int codMesa;
     private int codEmpleado;
-
-    public int getCodOrden() {
-        return codOrden;
-    }
-
-    public void setCodOrden(int codOrden) {
-        this.codOrden = codOrden;
-    }
 
     public int getCodMesa() {
         return codMesa;
@@ -36,6 +28,5 @@ public class Orden extends DetalleOrden {
     public void setCodEmpleado(int codEmpleado) {
         this.codEmpleado = codEmpleado;
     }
-    
-    
+
 }
