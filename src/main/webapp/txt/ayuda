@@ -13,8 +13,10 @@ poer "codOrden" en pagCobrarMesa en link
 
 Al pagar, cambiar de estado de mesa, y de orden (NO!! de ordenDETALLE)
 
-poner grafico
+poner grafico (realizado)
 
 - imagen de platos.
 
--poner regresar a algunas vistas.
+- poner regresar a algunas vistas. (Realizado)
+
+- cambiar falta (imagen) por la imagen (Realizado)

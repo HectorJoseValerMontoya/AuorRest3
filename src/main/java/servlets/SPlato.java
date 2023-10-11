@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 import modelo.Plato;
 
 public class SPlato extends HttpServlet {
@@ -49,6 +50,7 @@ public class SPlato extends HttpServlet {
         p.setPrecioPlato(precioPlato);
         p.setImagenPlato(img.trim().equals("") ? null : img);
         
+        JOptionPane.showMessageDialog(null, img);
         daoPlato.registrarPlato(p);
         
         request.getRequestDispatcher("pagPlato.jsp").forward(request, response);

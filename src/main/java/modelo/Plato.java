@@ -68,6 +68,6 @@ public class Plato extends CategoriaPlato{
     }
     
     public String getImgPlato(){
-        return "falta";
+        return imagenPlato == null || imagenPlato.equals("") ? "falta" : imagenPlato;
     }
 }
