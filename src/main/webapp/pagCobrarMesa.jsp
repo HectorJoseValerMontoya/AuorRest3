@@ -4,12 +4,14 @@
     Author     : HJVM
 --%>
 
+<%@page import="modelo.Mesa"%>
+<%@page import="dao.DaoMesa"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Cobrar Mesa</title>
         <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -20,6 +22,8 @@
 
     </head>
     <body>
+
+
         <header>
             <nav class="navbar navbar-expand-lg bg-gradient-yellow cabecera">
                 <div class="container">
@@ -41,7 +45,7 @@
                                 <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">Mesas</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link active"  aria-current="page" href="pagRealizarOrden.jsp">Realizar Orden</a></li>
-                                    <li><a class="nav-link" href="pagAdministrarMesa.jsp">Administrar Mesas</a></li> 
+                                    <li><a class="nav-link" href="pagAdministrarMesa.jsp">Administrar Mesas</a></li>
                                     <li><a class="nav-link" href="pagCobrarMesa.jsp">Cobrar Mesa</a></li> 
                                 </ul>
                             </li>
@@ -58,5 +62,69 @@
                 </div>
             </nav>
         </header>
-    </body>
+
+        <%DaoMesa daoMesa = new DaoMesa();%> 
+        <style>
+            .img{
+                margin-right: 100px;
+            }
+        </style>
+    <center>
+        <br>
+        <h1>Seleccione la mesa a cobrar.</h1>
+        <br>
+    </center>
+    <table border="0" class="table ">
+
+        <tbody>
+            <%
+                int c = 0;
+                out.print("<tr>");
+                for (Mesa mesa : daoMesa.getMesas()) {
+            %>
+        <td>
+            <%
+                int estadoAPoner = 2;
+                if (mesa.getEstadoMesa() == estadoAPoner) {
+            %>
+            <a href="pagDetalleCobrar.jsp?codMesa=<%=mesa.getCodMesa()%>">
+                <%
+                    }
+                %>
+                <img class="img" src="<%=mesa.getImgMesa()%>" alt="<%=mesa.getDescripcion()%>" width="250px"/>
+                <br>
+                <label><%=mesa.getDescripcion()%> | Mesa N° <%=mesa.getCodMesa()%> | (<%=mesa.getEstadoACancelar()%>)</label>
+
+                <%
+                    if (mesa.getEstadoMesa() == estadoAPoner) {
+                %>
+            </a>
+            <%
+                }
+            %>
+        </td>
+        <%
+            c++;
+            if (c == 3) {
+                c = 0;
+        %>
+        <tr>
+            <%
+                    }
+                }
+            %>
+            </tbody>
+    </table>
+
+
+
+
+    <!--
+        1) Escoger Mesa
+        2) Escoges Categoria
+        3) Escoges plato con cantidad
+        4) Regresa al paso 2
+    -->
+
+</body>
 </html>

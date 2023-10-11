@@ -67,6 +67,8 @@
             DaoPlato daoP = new DaoPlato();
             int codMesa = Integer.parseInt(request.getParameter("codMesa"));
             int codCategoriaPlato = Integer.parseInt(request.getParameter("codCategoriaPlato"));
+            int codOrden = Integer.parseInt(request.getParameter("codOrden"));
+            
         %>
 <br>
             <br>
@@ -85,6 +87,7 @@
                     <input type="hidden" name="op" value="1">
                     <input type="hidden" name="codMesa" value="<%=codMesa%>">
                     <input type="hidden" name="codPlato" value="<%=p.getCodPlato()%>">
+                    <input type="hidden" name="codOrden" value="<%=codOrden%>">
                     <img src="<%=p.getImgPlato()%>" alt="<%=p.getImgPlato()%>" width="100px"/>
                     <br>
                     <label><%=p.getNombrePlato()%></label>

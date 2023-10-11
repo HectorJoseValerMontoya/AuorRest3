@@ -12,8 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 import modelo.DetalleOrden;
 import modelo.Orden;
+import modelo.ValoresGlobales;
 
 /**
  *
@@ -32,6 +34,9 @@ public class SDetalleOrden extends HttpServlet {
             case 1:
                 agregarADetalleOrden(request, response);
                 break;
+            case 2:
+                cobrarDetalleOrden(request, response);
+                break;
         }
     }
 
@@ -40,26 +45,43 @@ public class SDetalleOrden extends HttpServlet {
         int codMesa = Integer.parseInt(request.getParameter("codMesa"));
         int codPlato = Integer.parseInt(request.getParameter("codPlato"));
         int cantidadDePlato = Integer.parseInt(request.getParameter("cantidadDePlato"));
+        int codOrden = Integer.parseInt(request.getParameter("codOrden"));
 
         Orden orden = new Orden();
         orden.setCodMesa(codMesa);
         orden.setCodPlato(codPlato);
         orden.setCantidad(cantidadDePlato);
-        //orden.setCodOrden();
-        
+        orden.setCodEmpleado(ValoresGlobales.codEmpleado);
+        orden.setCodOrden(codOrden);
+
         if (cantidadDePlato > 0) {
-            if (!daoO.existeOrden(orden)){
-                
+            if (!daoO.existeOrden(orden)) {
+                daoO.setCrearOrden(orden);
             }
             if (daoDO.existePlatoAgregadoEnDetalleOrden(orden)) {
                 daoDO.actualizarPlatoAgregadoEnDetalleOrden(orden);
             } else {
                 daoDO.agregarPlatoEnDetalleOrden(orden);
             }
-            daoDO.setAgregarPlato(orden);
         }
         request.getRequestDispatcher("pagOrdenarPedido.jsp?codMesa=" + codMesa).forward(request, response);
 
+    }
+
+    protected void cobrarDetalleOrden(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //Al pagar, cambiar de estado de mesa, y de orden (NO!! de ordenDETALLE)
+        double montoTotal = Double.parseDouble(request.getParameter("montoTotal"));
+        double montoDeCobro = Double.parseDouble(request.getParameter("montoDeCobro"));
+        int codMesa = Integer.parseInt(request.getParameter("codMesa"));
+
+        if (montoDeCobro < montoTotal) {
+            String error = "El monto es inferior al monto total.";
+            request.getRequestDispatcher("pagDetalleCobrar.jsp?error=" + error + "&codMesa=" + codMesa).forward(request, response);
+        } else{
+            daoDO.Cobrar(codMesa);
+            request.getRequestDispatcher("pagCobrarMesa.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

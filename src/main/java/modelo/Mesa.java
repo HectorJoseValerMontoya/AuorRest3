@@ -45,4 +45,8 @@ public class Mesa {
         return estadoMesa == 1 ? "Activo" : estadoMesa == 2? "Ocupado" : "En Manteniemiento";
         
     }
+    
+    public String getEstadoACancelar(){
+        return estadoMesa == 1 ? "No Cancelar" : estadoMesa == 2? "Cancelar" : "En Manteniemiento";
+    }
 }

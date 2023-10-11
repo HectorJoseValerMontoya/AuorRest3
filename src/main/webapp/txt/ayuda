@@ -7,3 +7,8 @@ pagCobrarMesa
 Modifcar a minusculas
 
 sentencia comentada a modificicar: //orden.setCodOrden(); en SDetalleOrden
+
+poer "codOrden" en pagCobrarMesa en link
+
+
+Al pagar, cambiar de estado de mesa, y de orden (NO!! de ordenDETALLE)

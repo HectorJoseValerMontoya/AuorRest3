@@ -12,6 +12,7 @@ public class Orden extends DetalleOrden {
 
     private int codMesa;
     private int codEmpleado;
+    private int estadoOrden;
 
     public int getCodMesa() {
         return codMesa;
@@ -27,6 +28,14 @@ public class Orden extends DetalleOrden {
 
     public void setCodEmpleado(int codEmpleado) {
         this.codEmpleado = codEmpleado;
+    }
+
+    public int getEstadoOrden() {
+        return estadoOrden;
+    }
+
+    public void setEstadoOrden(int estadoOrden) {
+        this.estadoOrden = estadoOrden;
     }
 
 }

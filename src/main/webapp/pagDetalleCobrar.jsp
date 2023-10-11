@@ -1,18 +1,19 @@
 <%-- 
-    Document   : pagRealizarOrden
-    Created on : 10 oct. 2023, 14:38:36
+    Document   : pagDetalleCobrar
+    Created on : 10 oct. 2023, 23:44:06
     Author     : HJVM
 --%>
 
+<%@page import="modelo.Plato"%>
+<%@page import="dao.DaoPlato"%>
+<%@page import="modelo.Orden"%>
 <%@page import="dao.DaoOrden"%>
-<%@page import="modelo.Mesa"%>
-<%@page import="dao.DaoMesa"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Realizar Orden</title>
+        <title>Detalle a cobrar</title>
         <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="css/styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -64,68 +65,76 @@
             </nav>
         </header>
 
-        <%DaoMesa daoMesa = new DaoMesa(); DaoOrden daoO = new DaoOrden(); int codOrden = daoO.siguienteOrden();%> 
-        <style>
-            .img{
-                margin-right: 100px;
-            }
-        </style>
     <center>
         <br>
-        <h1>Seleccione la mesa con la que va a trabajar.</h1>
+        <h1>Detalle de la orden.</h1>
         <br>
     </center>
-    <table border="0" class="table ">
 
+    <%
+        DaoOrden daoO = new DaoOrden();
+        DaoPlato daoP = new DaoPlato();
+        
+        int codMesa = Integer.parseInt(request.getParameter("codMesa"));
+    %>
+
+    <table class="table table-bordered" border="1">
+        <thead>
+            <tr>
+                <th><center>Nombre del plato</center></th>
+                <th><center>Estado</center></th>
+                <th><center>Precio U.</center></th>
+                <th><center>Cantidad</center></th>
+                <th><center>Monto</center></th>
+            </tr>
+        </thead>
         <tbody>
             <%
-                int c = 0;
-                out.print("<tr>");
-                for (Mesa mesa : daoMesa.getMesas()) {
+                double montoTotal = 0;
+                for (Orden o : daoO.getListarOrdenes(daoO.getCodOrden(codMesa))) {
+                    Plato p = daoP.getDatosPlato(o.getCodPlato());
+                    montoTotal += p.getPrecioPlato() * o.getCantidad();
             %>
-        <td>
-            <%
-                int estadoAPoner = 1;
-                if (mesa.getEstadoMesa() == estadoAPoner) {
-            %>
-            <a href="SMesa?op=1&codMesa=<%=mesa.getCodMesa()%>&codOrden=<%=codOrden%>">
-                <%
-                    }
-                %>
-                <img class="img" src="<%=mesa.getImgMesa()%>" alt="<%=mesa.getDescripcion()%>" width="250px"/>
-                <br>
-                <label><%=mesa.getDescripcion()%> | Mesa N° <%=mesa.getCodMesa()%> | (<%=mesa.getEstadoMesaEnNombre()%>)</label>
-
-                <%
-                    if (mesa.getEstadoMesa() == estadoAPoner) {
-                %>
-            </a>
+                <tr>
+        <center></center>
+                <td><center><%=p.getNombrePlato()%></center></td>
+                <td><center><%=o.getNombreEstadoDetalleOrden()%></center></td>
+                <td><center><%=p.getPrecioPlato()%></center></td>
+                <td><center><%=o.getCantidad()%></center></td>
+                <td><center><%=p.getPrecioPlato() * o.getCantidad()%></center></td>
+            </tr>
             <%
                 }
             %>
-        </td>
-        <%
-            c++;
-            if (c == 3) {
-                c = 0;
-        %>
-        <tr>
-            <%
-                    }
-                }
-            %>
-            </tbody>
+        </tbody>
     </table>
+        
+            <label>MontoTotal: <u><%=montoTotal%></u>   Soles</label>
+        
+        <br>
+        <br>
+        <br>
+        
+        <form action="SDetalleOrden">
+            <input type="hidden" name="op" value="2">
+            <input type="hidden" name="montoTotal" value="<%=montoTotal%>">
+            <input type="hidden" name="codMesa" value="<%=codMesa%>">
+            <label>Monto con cuanto pagar</label>
+            <input type="number" name="montoDeCobro" min="0" value="<%=montoTotal%>">
+            <label> Soles</label>
+            <br>
+            <br>
+            <center>
+                <input type="submit" class="basico boton-azul botonRedondoTitulo" value=" Pagar ">
+            </center>
+        </form>
+            
+            <%
+                if (request.getParameter("error") != null){
+                    %>
+                    <label style="color: red;"><%=request.getParameter("error")%></label>
+                    <%
+                }
+            %>
 
-
-
-
-    <!--
-        1) Escoger Mesa
-        2) Escoges Categoria
-        3) Escoges plato con cantidad
-        4) Regresa al paso 2
-    -->
-
-</body>
 </html>

@@ -66,12 +66,13 @@
         <h1>Seleccione la categoria</h1>
         <br>
     </center>
-    
+
     <%
         DaoCategoriaPlato daoCP = new DaoCategoriaPlato();
         int codMesa = Integer.parseInt(request.getParameter("codMesa"));
+        int codOrden = Integer.parseInt(request.getParameter("codOrden"));
     %>
-    
+
     <table border="0" class="table table-bordered">
         <tbody>
             <%
@@ -80,7 +81,7 @@
                 for (CategoriaPlato cp : daoCP.getListarCategoriaPlatosActivos()) {
             %>
         <td>
-            <a style="text-decoration: none;" class="basico botonRedondo" href="SOrden?op=1&codMesa=<%=codMesa%>&codCategoriaPlato=<%=cp.getCodCategoriaPlato()%>"><%=cp.getNombreCategoria()%></a>
+            <a style="text-decoration: none;" class="basico botonRedondo" href="SOrden?op=1&codMesa=<%=codMesa%>&codCategoriaPlato=<%=cp.getCodCategoriaPlato()%>&codOrden=<%=codOrden%>"><%=cp.getNombreCategoria()%></a>
         </td>
         <%
             c++;
@@ -94,6 +95,6 @@
             %>
             </tbody>
     </table>
-    
+
 </body>
 </html>

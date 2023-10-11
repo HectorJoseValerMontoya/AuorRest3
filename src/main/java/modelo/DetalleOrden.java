@@ -14,6 +14,7 @@ public class DetalleOrden {
     private int codOrden;
     private int codPlato;
     private int cantidad;
+    private int estadoDetalleOrden;
 
     public int getCodDetalleOrden() {
         return codDetalleOrden;
@@ -45,6 +46,18 @@ public class DetalleOrden {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public int getEstadoDetalleOrden() {
+        return estadoDetalleOrden;
+    }
+
+    public void setEstadoDetalleOrden(int estadoDetalleOrden) {
+        this.estadoDetalleOrden = estadoDetalleOrden;
+    }
+    
+    public String getNombreEstadoDetalleOrden(){
+        return estadoDetalleOrden == 1? "Activo" : "Anulado";
     }
 
 }

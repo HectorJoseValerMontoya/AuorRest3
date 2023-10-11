@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.ValoresGlobales;
 
 public class SLogin extends HttpServlet {
 
@@ -35,6 +36,7 @@ public class SLogin extends HttpServlet {
 
         if (daoLogin.existeCodigoUsuario(usuario)) {
             if (contra.equals(daoLogin.ContraUsuario(usuario))) {
+                ValoresGlobales.codEmpleado = usuario;
                 request.getRequestDispatcher("pagEmpleado.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("pagLogin.jsp?error=2").forward(request, response);

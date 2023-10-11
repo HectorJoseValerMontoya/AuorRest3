@@ -32,7 +32,8 @@ public class SOrden extends HttpServlet {
             throws ServletException, IOException {
         int codCategoriaPlato = Integer.parseInt(request.getParameter("codCategoriaPlato"));
         int codMesa = Integer.parseInt(request.getParameter("codMesa"));
-        request.getRequestDispatcher("pagOrdenarPlato.jsp?codCategoriaPlato=" + codCategoriaPlato + "&codMesa=" + codMesa).forward(request, response);
+        int codOrden = Integer.parseInt(request.getParameter("codOrden"));
+        request.getRequestDispatcher("pagOrdenarPlato.jsp?codCategoriaPlato=" + codCategoriaPlato + "&codMesa=" + codMesa + "&codOrden=" + codOrden).forward(request, response);
         
     }
 

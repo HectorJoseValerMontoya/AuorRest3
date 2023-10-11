@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,10 +38,11 @@ public class SMesa extends HttpServlet {
     protected void ocuparMesa(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int codMesa = Integer.parseInt(request.getParameter("codMesa"));
-        int siguienteCodOrden = Integer.parseInt(request.getParameter("codOrden"));
+        int codOrden = Integer.parseInt(request.getParameter("codOrden"));
+        
         daoMesa.setOcuparMesa(codMesa);
 
-        request.getRequestDispatcher("pagOrdenarPedido.jsp?codMesa=" + codMesa +"&codOrden=" + siguienteCodOrden).forward(request, response);
+        request.getRequestDispatcher("pagOrdenarPedido.jsp?codMesa=" + codMesa +"&codOrden=" + codOrden).forward(request, response);
     }
 
     protected void cambiarEstadoMesa(HttpServletRequest request, HttpServletResponse response)
