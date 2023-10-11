@@ -96,7 +96,7 @@
                 %>
                 <img class="img" src="<%=mesa.getImgMesa()%>" alt="<%=mesa.getDescripcion()%>" width="250px"/>
                 <br>
-                <label><%=mesa.getDescripcion()%> | Mesa N° <%=mesa.getCodMesa()%> | (<%=mesa.getEstadoMesaEnNombre()%>)</label>
+                <label><%=mesa.getDescripcion()%> | Mesa N° <%=mesa.getCodMesa()%> | (<%=mesa.getEstadoMesaEnNombreSeguirComprando()%>)</label>
 
                 <%
                     if (mesa.getEstadoMesa() == estadoAPoner) {

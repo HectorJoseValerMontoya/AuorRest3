@@ -4,12 +4,25 @@
     Author     : HJVM
 --%>
 
+<%@page import="dao.DaoGrafico"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+        <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/adminlte.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/botones.css" rel="stylesheet" type="text/css"/>
+        <link href="css/inputs.css" rel="stylesheet" type="text/css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+
     </head>
     <body>
         <header>
@@ -51,7 +64,51 @@
                 </div>
             </nav>
         </header>
+
+
         
+        <style>
+    .container {
+      width: 70%;
+      margin: 15px auto;
+    }
+    body {
+      text-align: center;
+      color: green;
+    }
+    h2 {
+      text-align: center;
+      font-family: "Verdana", sans-serif;
+      font-size: 30px;
+    }
+  </style>
+  <body>
+
+   
+    <div class="container">
+      <h2>Venta de Platos</h2>
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+  </body>
+  <% DaoGrafico daoG = new DaoGrafico(); %>
+    <script>
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: [<%=daoG.getLabels()%>
+        ],
+        datasets: [
+          {
+            label: "Platos",
+            data: [<%=daoG.getDataSets()%>],
+            backgroundColor: "rgba(153,205,1,0.6)",
+          },
+        ],
+      },
+    });
+  </script>
         
-    </body>
 </html>
