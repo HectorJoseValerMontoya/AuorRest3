@@ -112,6 +112,7 @@ create table orden(
 	codOrden int not null auto_increment,
     codMesa int not null,
     codEmpleado int not null,
+    estadoOrden int not null default 1,
     primary key(codOrden),
     foreign key(codMesa) references mesa(codMesa),
     foreign key(codEmpleado) references empleado(codEmpleado)
@@ -123,12 +124,14 @@ create table detalleOrden(
     codOrden int not null,
     codPlato int not null,
     cantidad int not null,
+    estadoDetalleOrden int not null default 1,
     primary key(codDetalleOrden),
     foreign key (codOrden) references orden(codOrden),
     foreign key (codPlato) references plato(codPlato)
 );
 
 -- --------------------------------------------------------
+
 
 
 
@@ -183,6 +186,12 @@ select * from plato p inner join CategoriaPlato cp on p.codCategoriaPlato = cp.c
 end$$
 
 
+delimiter $$
+create procedure mostrarTodosLosDatosDePlatosActivosPorCategoria(_codCategoriaPlato int)
+begin
+select * from plato p inner join CategoriaPlato cp on p.codCategoriaPlato = cp.codCategoriaPlato where estadoPlato = 1 and p.codCategoriaPlato = _codCategoriaPlato;
+end$$
+
 
 delimiter $$
 create procedure mostrarTodosLosDatosDeUnPlato(_codPlato int)
@@ -202,7 +211,6 @@ begin
 select * from CategoriaPlato where estadoCategoria = 1;
 end$$
 
-select * from categoriaPlato;
 
 delimiter $$
 create procedure mostrarTodosLosDatosDeUnCategoriaPlato(_codCategoriaPlato int)
@@ -223,8 +231,6 @@ begin
 select nombreCategoria from categoriaPlato where codCategoriaPlato =  _codCategoriaPlato;
 end$$
 
-select *  from categoriaPlato;
-
 delimiter $$
 create procedure eliminarEmpleado(_codEmpleado int)
 begin
@@ -239,8 +245,7 @@ update categoriaPlato set estadoCategoria = 2 where codCategoriaPlato = _codCate
 update plato set estadoPlato = 2 where codCategoriaPlato = _codCategoriaPlato;
 end$$
 
-select * from categoriaPlato;
-select * from plato;
+
 
 delimiter $$
 create procedure actualizarEmpleado(nombre varchar(100), apellido varchar(100), contra varchar(100), codPerfil int, estado int, _codEmpleado int)
@@ -260,7 +265,6 @@ begin
 update plato set nombrePlato = _nombrePlato, precioPlato = _precioPlato, codCategoriaPlato = _codCategoriaPlato where codPlato = _codPlato;
 end$$
 
-select * from plato;
 
 delimiter $$
 create procedure eliminarPerfilEmpleado(_codPerfilEmpleado int)
@@ -276,19 +280,15 @@ begin
 update plato set estadoPlato = 2 where codPlato = _codPlato;
 end$$
 
-select * from plato;
+delimiter $$
+create procedure mostrarPlatoAgregadoEnDetalleOrden(_codMesa int, _codPlato int, _codOrden int)
+begin
+select * from detalleOrden _do inner join Orden o on o.codOrden = _do.codOrden where codMesa = _codMesa and codPlato = _codPlato and _do.codOrden = _codOrden; 
+end$$
 
-select * from categoriaPlato;
-
-
--- <<<<<<<<<<<<Consultas y Actualizaciones>>>>>>>>>>>>>
-
-#update empleado set nombreEmpleado = "Hola", apellidoEmpleado = "Ape", contra = "contra", codPerfilEmpleado = 2 where codEmpleado = 1001;
-#update empleado set estadoEmpleado = 2 where codEmpleado = 1001;
-#update empleado set nombreEmpleado = "Hola" where codEmpleado = 1001;
-
-select contra from empleado where CodEmpleado = 1001;
-
-SELECT
-
-select max(codPlato) + 1 from plato;
+delimiter $$
+create procedure cobrarDetalleOrden(_codMesa int)
+begin
+update mesa set estadoMesa = 1 where codMesa = _codMesa;
+update orden set estadoOrden = 2 where codMesa = _codMesa;
+end$$
