@@ -110,4 +110,22 @@ public class DaoMesa {
             setDesocuparMesa(codMesa);
         }
     }
+    
+    public int getCodigoOrdenPorMesaOcupada(int codMesa){
+        String sql = "select codOrden from Orden o inner join mesa m on o.codMesa = m.codMesa where estadoMesa = 2 and m.codMesa = ?;";
+        Connection cn;
+        
+        try {
+            cn = MySQLConexion.getConexion();
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.setInt(1, codMesa);
+            ResultSet rs = st.executeQuery();
+            if  (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        
+        return -1;
+    }
 }

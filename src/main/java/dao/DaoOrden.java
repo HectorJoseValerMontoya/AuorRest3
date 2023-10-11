@@ -19,7 +19,7 @@ import util.MySQLConexion;
  */
 public class DaoOrden {
 
-    public boolean existeOrden(Orden o) {
+    public boolean existeOrden(int codOrden) {
         String sql = "select * from orden where codOrden = ?;";
 
         Connection cn = null;
@@ -27,7 +27,7 @@ public class DaoOrden {
         try {
             cn = MySQLConexion.getConexion();
             PreparedStatement st = cn.prepareStatement(sql);
-            st.setInt(1, o.getCodOrden());
+            st.setInt(1, codOrden);
             if (st.executeQuery().next()) {
                 return true;
             }

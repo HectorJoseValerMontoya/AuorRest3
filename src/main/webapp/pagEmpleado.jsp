@@ -44,6 +44,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">Mesas</a>
                                 <ul class="dropdown-menu">
+                                    <li><a class="nav-link active"  aria-current="page" href="pagSeguirOrdenando.jsp">Seguir Ordenando</a></li>
                                     <li><a class="nav-link active"  aria-current="page" href="pagRealizarOrden.jsp">Realizar Orden</a></li>
                                     <li><a class="nav-link" href="pagAdministrarMesa.jsp">Administrar Mesas</a></li> 
                                     <li><a class="nav-link" href="pagCobrarMesa.jsp">Cobrar Mesa</a></li> 

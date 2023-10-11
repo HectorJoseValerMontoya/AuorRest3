@@ -5,6 +5,7 @@
 package servlets;
 
 import dao.DaoDetalleOrden;
+import dao.DaoMesa;
 import dao.DaoOrden;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,6 +26,7 @@ public class SDetalleOrden extends HttpServlet {
 
     DaoDetalleOrden daoDO = new DaoDetalleOrden();
     DaoOrden daoO = new DaoOrden();
+    DaoMesa daoM = new DaoMesa();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,6 +38,9 @@ public class SDetalleOrden extends HttpServlet {
                 break;
             case 2:
                 cobrarDetalleOrden(request, response);
+                break;
+            case 3:
+                anadirPedido(request, response);
                 break;
         }
     }
@@ -55,7 +60,7 @@ public class SDetalleOrden extends HttpServlet {
         orden.setCodOrden(codOrden);
 
         if (cantidadDePlato > 0) {
-            if (!daoO.existeOrden(orden)) {
+            if (!daoO.existeOrden(orden.getCodOrden())) {
                 daoO.setCrearOrden(orden);
             }
             if (daoDO.existePlatoAgregadoEnDetalleOrden(orden)) {
@@ -78,11 +83,19 @@ public class SDetalleOrden extends HttpServlet {
         if (montoDeCobro < montoTotal) {
             String error = "El monto es inferior al monto total.";
             request.getRequestDispatcher("pagDetalleCobrar.jsp?error=" + error + "&codMesa=" + codMesa).forward(request, response);
-        } else{
+        } else {
             daoDO.Cobrar(codMesa);
             request.getRequestDispatcher("pagCobrarMesa.jsp").forward(request, response);
         }
     }
+    
+      protected void anadirPedido(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+          int codMesa = Integer.parseInt(request.getParameter("codMesa"));
+          int codOrden = daoM.getCodigoOrdenPorMesaOcupada(codMesa);
+          
+          request.getRequestDispatcher("pagOrdenarPedido.jsp?codMesa="+codMesa+"&codOrden="+codOrden).forward(request, response);
+      }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

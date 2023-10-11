@@ -1,29 +1,17 @@
 <%-- 
-    Document   : pagOrdenarPlato
-    Created on : 10 oct. 2023, 18:25:33
+    Document   : main.jsp
+    Created on : 11 oct. 2023, 15:02:33
     Author     : HJVM
 --%>
 
-<%@page import="modelo.Plato"%>
-<%@page import="dao.DaoPlato"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ordenar Plato</title>
-        <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
-        <link href="css/styles.css" rel="stylesheet" type="text/css"/>
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/adminlte.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/botones.css" rel="stylesheet" type="text/css"/>
-        <link href="css/inputs.css" rel="stylesheet" type="text/css"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
+        <title>JSP Page</title>
     </head>
     <body>
-
         <header>
             <nav class="navbar navbar-expand-lg bg-gradient-yellow cabecera">
                 <div class="container">
@@ -63,55 +51,7 @@
                 </div>
             </nav>
         </header>
-
-        <%
-            DaoPlato daoP = new DaoPlato();
-            int codMesa = Integer.parseInt(request.getParameter("codMesa"));
-            int codCategoriaPlato = Integer.parseInt(request.getParameter("codCategoriaPlato"));
-            int codOrden = Integer.parseInt(request.getParameter("codOrden"));
-            
-        %>
-<br>
-            <br>
-            <br>
-            
-        <table border="0" class="table table-bordered">
-            <tbody>
-                <%
-                    int c = 0;
-                    out.print("<tr>");
-                    for (Plato p : daoP.getListarPlatosActivosDeCategoria(codCategoriaPlato)) {
-                %>
-            <td>
-            <center>
-                <form action="SDetalleOrden">
-                    <input type="hidden" name="op" value="1">
-                    <input type="hidden" name="codMesa" value="<%=codMesa%>">
-                    <input type="hidden" name="codPlato" value="<%=p.getCodPlato()%>">
-                    <input type="hidden" name="codOrden" value="<%=codOrden%>">
-                    <img src="<%=p.getImgPlato()%>" alt="<%=p.getImgPlato()%>" width="100px"/>
-                    <br>
-                    <label><%=p.getNombrePlato()%></label>
-                    <br>
-                    <input type="number" name="cantidadDePlato" min="0" placeholder="Cantidad..." required="true" value="0">
-                    <br>
-                    <input class="basico boton-azul" type="submit" value="Agregar +">
-                </form>
-            </center>
-        </td>
-        <%
-            c++;
-            if (c == 3) {
-                c = 0;
-        %>
-        <tr>
-            <%
-                    }
-                }
-            %>
-            </tbody>
-    </table>
-            
-
-</body>
+        
+        
+    </body>
 </html>
